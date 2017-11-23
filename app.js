@@ -34,7 +34,7 @@ expressCassandra.setDirectory(__dirname + '/models').bind(
     }
 );
 
-var mongoDB = 'mongodb://juamppah:capitycap7@ds115866.mlab.com:15866/toxo-team';
+var mongoDB = 'mongodb://admin:admin@ds115866.mlab.com:15866/toxo-team';
 mongoose.connect(mongoDB, {
     useMongoClient: true
 });
