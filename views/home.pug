@@ -1,0 +1,12 @@
+extends ../node_modules/jade-bootstrap/_bootstrap
+
+
+append body
+    .container
+        h1= title
+        p Welcome to #{title}
+        +alert-info("Alpha version")
+        +navbar("TipiT","dropdown_menu","inverse")
+            +nav_item("../","active") Logo
+            +nav_item("users") Users
+            +nav_item("waiters") Waiters
