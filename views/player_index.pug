@@ -1,0 +1,14 @@
+extends toxo-layout
+
+block content
+    h1= title
+    p Welcome to #[em Toxoteam].
+
+
+    if error
+        p Error getting dynamic content.
+    else
+        p Cantidad de jugadores anotados:
+
+        ul
+            li #[strong Jugadores:] !{data.player_count}

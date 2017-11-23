@@ -63,7 +63,9 @@ app.use(cookieParser());
 app.use(expressValidator());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', require('./routes/index'));
+//app.use('/', require('./routes/index'));
+app.use('/', require('./routes/toxoteam'));
+
 
 app.use('/users', require('./routes/users'));
 app.use('/waiters',require('./routes/waiters'));

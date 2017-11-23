@@ -23,7 +23,7 @@ PlayerSchema
 PlayerSchema
     .virtual('url')
     .get(function () {
-        return '/catalog/player/' + this._id;
+        return '/player/' + this._id;
     });
 
 //Export model
