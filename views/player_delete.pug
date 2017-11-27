@@ -1,0 +1,14 @@
+extends t-layout
+
+block content
+    h1 #{title}: #{player.name}
+    p= player.date_of_birth
+
+
+    p Do you really want to delete this Player?
+
+    form(method='POST' action='')
+        div.form-group
+            input#playerid.form-control(type='hidden',name='playerid', required='true', value=player._id )
+
+        button.btn.btn-primary(type='submit') Delete

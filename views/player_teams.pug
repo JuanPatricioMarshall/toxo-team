@@ -1,0 +1,20 @@
+extends t-layout
+
+block content
+    h1= title
+
+    ul
+    each player in team1
+        li
+            a(href=/player/ + player._id) #{player.first_name + " '" + player.nick +"' " + player.family_name }
+
+    p
+    p
+    ul
+    each player in team2
+        li
+            a(href=/player/ + player._id) #{player.first_name + " '" + player.nick + "' " + player.family_name }
+
+
+    p
+    <form><input type=button value="Remake" onClick="window.location.reload()"></form>

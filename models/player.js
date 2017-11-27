@@ -16,7 +16,7 @@ var PlayerSchema = new Schema(
 PlayerSchema
     .virtual('name')
     .get(function () {
-        return this.family_name + " '" + this.nick +"' " + this.first_name;
+        return this.first_name + " '" + this.nick +"' " + this.family_name;
     });
 
 // Virtual for player's URL

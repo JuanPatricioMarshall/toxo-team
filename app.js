@@ -64,13 +64,13 @@ app.use(expressValidator());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', require('./routes/index'));
-app.use('/', require('./routes/toxoteam'));
+app.use('/', require('./routes/team_maker'));
 
-
-app.use('/users', require('./routes/users'));
-app.use('/waiters',require('./routes/waiters'));
+//
+// app.use('/users', require('./routes/users'));
+// app.use('/waiters',require('./routes/waiters'));
 app.use('/home', require('./routes/home'));
-app.use('/catalog', require('./routes/catalog'));
+// app.use('/catalog', require('./routes/catalog'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

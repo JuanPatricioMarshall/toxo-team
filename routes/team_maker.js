@@ -17,11 +17,25 @@ router.get('/player/create', player_controller.player_create_get);
 router.post('/player/create', player_controller.player_create_post);
 
 
-/* GET request for one Author. */
+/* GET request for one Player. */
 router.get('/player/:id', player_controller.player_detail);
 
-/* GET request for list of all Authors. */
+/* GET request for list of all Player. */
 router.get('/players', player_controller.player_list);
 
+router.post('/players_team', player_controller.player_make_team);
+
+/* GET request to delete Player. */
+router.get('/player/:id/delete', player_controller.player_delete_get);
+
+// POST request to delete Player
+router.post('/player/:id/delete', player_controller.player_delete_post);
+
+
+/* GET request to delete Player. */
+router.get('/player/:id/update', player_controller.player_update_get);
+
+// POST request to delete Player
+router.post('/player/:id/update', player_controller.player_update_post);
 
 module.exports = router;

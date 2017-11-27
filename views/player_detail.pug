@@ -1,6 +1,10 @@
-extends toxo-layout
+extends t-layout
 
 block content
 
     h1 Jugador: #{player.name}
     p #{player.date_of_birth}
+
+    hr
+    p
+        a(href=player.url + '/delete') Delete player
