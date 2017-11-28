@@ -63,6 +63,9 @@ exports.player_make_team = function (req, res) {
     var team1 = [];
     var team2 = [];
 
+    var score1 = 0;
+    var score2 = 0;
+
     players = shuffle(players);
 
     for (var i = 0; i < 5; i++) {
@@ -70,26 +73,74 @@ exports.player_make_team = function (req, res) {
         var playerI = JSON.parse(players.pop());
         var playerII = JSON.parse(players.pop());
 
-        if (playerI.score > playerII.score) {
-            if (i % 2 === 0) {
-                team1.push(playerI);
-                team2.push(playerII);
-            }
-            else {
-                team1.push(playerII);
-                team2.push(playerI);
-            }
+        if(i === 0){
+            team1.push(playerI);
+            score1 = score1 + playerI.score;
+            team2.push(playerII);
+            score2 = score2 + playerII.score;
+
         }
-        else {
-            if (i % 2 !== 0) {
-                team1.push(playerI);
-                team2.push(playerII);
+        else{
+            if(score1 >= score2){
+                if (playerI.score > playerII.score){
+
+                    team2.push(playerI);
+                    score2 = score2 + playerI.score;
+
+                    team1.push(playerII);
+                    score1 = score1 + playerII.score;
+
+
+                } else{
+                    team2.push(playerII);
+                    score2 = score2 + playerII.score;
+
+                    team1.push(playerI);
+                    score1 = score1 + playerI.score;
+                }
             }
-            else {
-                team1.push(playerII);
-                team2.push(playerI);
+            else{
+                if (playerI.score < playerII.score){
+
+                    team2.push(playerI);
+                    score2 = score2 + playerI.score;
+
+                    team1.push(playerII);
+                    score1 = score1 + playerII.score;
+
+
+                } else{
+                    team2.push(playerII);
+                    score2 = score2 + playerII.score;
+
+                    team1.push(playerI);
+                    score1 = score1 + playerI.score;
+                }
             }
+
+
         }
+        //
+        // if (playerI.score > playerII.score) {
+        //     if (i % 2 === 0) {
+        //         team1.push(playerI);
+        //         team2.push(playerII);
+        //     }
+        //     else {
+        //         team1.push(playerII);
+        //         team2.push(playerI);
+        //     }
+        // }
+        // else {
+        //     if (i % 2 !== 0) {
+        //         team1.push(playerI);
+        //         team2.push(playerII);
+        //     }
+        //     else {
+        //         team1.push(playerII);
+        //         team2.push(playerI);
+        //     }
+        // }
 
     }
 
