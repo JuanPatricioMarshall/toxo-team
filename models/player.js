@@ -8,7 +8,8 @@ var PlayerSchema = new Schema(
         family_name: {type: String, required: true, max: 100},
         nick: {type: String, required: true},
         date_of_birth: {type: Date},
-        score: {type: Number},
+        score: {type: Number, required: true},
+        image_url: {type: String},
     }
 );
 
