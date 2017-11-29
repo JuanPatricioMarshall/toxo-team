@@ -378,6 +378,27 @@ exports.player_delete_post = function (req, res, next) {
 
 };
 
+exports.player_update_score_put = function (req, res, next) {
+
+    req.checkBody('score', 'Score must exist').notEmpty();
+
+
+    const score = {
+        score: req.body.score,
+    };
+
+    async.parallel({
+        player: function (callback) {
+            Player.update({_id: req.params.id}, score, function (err, raw) {
+                if (err) {
+                    res.send(err);
+                }
+                res.redirect('/players');
+            });
+        }
+    });
+};
+
 
 // Display Player update form on GET
 exports.player_update_get = function (req, res) {
@@ -396,7 +417,7 @@ exports.player_update_get = function (req, res) {
         }
 
 
-        res.render('player_form', {title: 'Update Player', players: results.players});
+        res.render('player_score_form', {title: 'Update Player', players: results.players});
     });
 
 };
@@ -404,43 +425,50 @@ exports.player_update_get = function (req, res) {
 // Handle Player update on POST
 exports.player_update_post = function (req, res) {
 
-    req.checkBody('first_name', 'First name must be specified.').notEmpty(); //We won't force Alphanumeric, because people might have spaces.
-    req.checkBody('family_name', 'Family name must be specified.').notEmpty();
-    req.checkBody('family_name', 'Family name must be alphanumeric text.').isAlpha();
+
     req.checkBody('score', 'Score must be number').isNumeric();
 
-    req.sanitize('first_name').escape();
-    req.sanitize('family_name').escape();
-    req.sanitize('first_name').trim();
-    req.sanitize('family_name').trim();
-    req.sanitize('nick').escape();
-    req.sanitize('nick').trim();
-    req.sanitize('score').toInt();
-    req.sanitize('date_of_birth').toDate();
 
-    //Sanitize id passed in.
+    req.sanitize('score').toInt();
+
     req.sanitize('id').escape();
     req.sanitize('id').trim();
 
-    //Check other data
 
-    var player = new Player(
-        {
-            first_name: req.body.first_name,
-            family_name: req.body.family_name,
-            date_of_birth: req.body.date_of_birth,
-            score: req.body.score,
-            nick: req.body.nick
-        });
+    const score = {
+        score: req.body.score,
+    };
 
-
-    // Data from form is valid. Update the record.
-    Player.findByIdAndUpdate(req.params.id, player, {}, function (err, player) {
-        if (err) {
-            return next(err);
+    async.parallel({
+        player: function (callback) {
+            Player.update({_id: req.params.id}, score, function (err, raw) {
+                if (err) {
+                    res.send(err);
+                }
+                res.redirect('/players');
+            });
         }
-        //successful - redirect to book detail page.
-        res.redirect(player.url);
     });
+
+
+    //
+    // var player = new Player(
+    //     {
+    //         first_name: req.body.first_name,
+    //         family_name: req.body.family_name,
+    //         date_of_birth: req.body.date_of_birth,
+    //         score: req.body.score,
+    //         nick: req.body.nick
+    //     });
+    //
+    //
+    // // Data from form is valid. Update the record.
+    // Player.findByIdAndUpdate(req.params.id, player, {}, function (err, player) {
+    //     if (err) {
+    //         return next(err);
+    //     }
+    //     //successful - redirect to book detail page.
+    //     res.redirect(player.url);
+    // });
 
 };

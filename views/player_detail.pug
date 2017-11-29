@@ -9,3 +9,8 @@ block content
     hr
     p
         a(href=player.url + '/delete') Delete player
+    form(method='POST' action=player.url + '/update')
+        div.form-group
+            label(for='score') score:
+            input#score.form-control(type='Number', placeholder='0'  name= 'score' required = 'true' )
+        button.btn.btn-primary(type='submit') Update score

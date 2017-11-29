@@ -38,10 +38,13 @@ router.get('/player/:id/delete', player_controller.player_delete_get);
 router.post('/player/:id/delete', player_controller.player_delete_post);
 
 
-/* GET request to delete Player. */
-router.get('/player/:id/update', player_controller.player_update_get);
+/* PUT request to update Player score. */
+router.put('/player/:id/update_score', player_controller.player_update_score_put);
 
 // POST request to delete Player
 router.post('/player/:id/update', player_controller.player_update_post);
+
+// GET request to delete Player
+router.get('/player/:id/update', player_controller.player_update_get);
 
 module.exports = router;
