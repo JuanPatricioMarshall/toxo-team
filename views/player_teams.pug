@@ -3,17 +3,27 @@ extends t-layout
 block content
     h1= title
 
+    | <br><br>
     ul
     each player in team1
         li
-            a(href=/player/ + player._id) #{player.first_name + " '" + player.nick +"' " + player.family_name }
+            a(href=/player/ + player._id)
+                img(width="50", height="50", src=player.image_url)
+            p #{player.first_name + " '" + player.nick +"' " + player.family_name }
+    p
+    p
+    | <br><br>
+    h2 vs
+    p
+    | <br><br>
+    p
 
-    p
-    p
     ul
     each player in team2
         li
-            a(href=/player/ + player._id) #{player.first_name + " '" + player.nick + "' " + player.family_name }
+            a(href=/player/ + player._id)
+                img(width="50", height="50", src=player.image_url)
+            p #{player.first_name + " '" + player.nick + "' " + player.family_name }
 
 
     p

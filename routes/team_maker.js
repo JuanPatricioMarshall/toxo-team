@@ -23,7 +23,13 @@ router.get('/player/:id', player_controller.player_detail);
 /* GET request for list of all Player. */
 router.get('/players', player_controller.player_list);
 
+
+/* GET request for list of all Player. */
+router.get('/players_light', player_controller.player_list_no_img);
+
 router.post('/players_team', player_controller.player_make_team);
+
+router.post('/players_team_no_img', player_controller.player_make_team_no_img);
 
 /* GET request to delete Player. */
 router.get('/player/:id/delete', player_controller.player_delete_get);

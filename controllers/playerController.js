@@ -28,6 +28,20 @@ exports.player_list = function (req, res, next) {
 
 };
 
+exports.player_list_no_img = function (req, res, next) {
+
+    Player.find()
+        .sort([['name', 'ascending']])
+        .exec(function (err, player_list) {
+            if (err) {
+                return next(err);
+            }
+            //Successful, so render
+            res.render('player_list_no_img', {title: 'Player List', player_list: player_list});
+        });
+
+};
+
 // Display detail page for a specific Player
 exports.player_detail = function (req, res, next) {
 
@@ -148,6 +162,104 @@ exports.player_make_team = function (req, res) {
 
 };
 
+exports.player_make_team_no_img = function (req, res) {
+
+    var players = req.body.players;
+
+    if (players.length != 10) {
+        res.render('team_error');
+        return;
+    }
+
+    var team1 = [];
+    var team2 = [];
+
+    var score1 = 0;
+    var score2 = 0;
+
+    players = shuffle(players);
+
+    for (var i = 0; i < 5; i++) {
+
+        var playerI = JSON.parse(players.pop());
+        var playerII = JSON.parse(players.pop());
+
+        if (i === 0) {
+            team1.push(playerI);
+            score1 = score1 + playerI.score;
+            team2.push(playerII);
+            score2 = score2 + playerII.score;
+
+        }
+        else {
+            if (score1 >= score2) {
+                if (playerI.score > playerII.score) {
+
+                    team2.push(playerI);
+                    score2 = score2 + playerI.score;
+
+                    team1.push(playerII);
+                    score1 = score1 + playerII.score;
+
+
+                } else {
+                    team2.push(playerII);
+                    score2 = score2 + playerII.score;
+
+                    team1.push(playerI);
+                    score1 = score1 + playerI.score;
+                }
+            }
+            else {
+                if (playerI.score < playerII.score) {
+
+                    team2.push(playerI);
+                    score2 = score2 + playerI.score;
+
+                    team1.push(playerII);
+                    score1 = score1 + playerII.score;
+
+
+                } else {
+                    team2.push(playerII);
+                    score2 = score2 + playerII.score;
+
+                    team1.push(playerI);
+                    score1 = score1 + playerI.score;
+                }
+            }
+
+
+        }
+        //
+        // if (playerI.score > playerII.score) {
+        //     if (i % 2 === 0) {
+        //         team1.push(playerI);
+        //         team2.push(playerII);
+        //     }
+        //     else {
+        //         team1.push(playerII);
+        //         team2.push(playerI);
+        //     }
+        // }
+        // else {
+        //     if (i % 2 !== 0) {
+        //         team1.push(playerI);
+        //         team2.push(playerII);
+        //     }
+        //     else {
+        //         team1.push(playerII);
+        //         team2.push(playerI);
+        //     }
+        // }
+
+    }
+
+    res.render('player_teams_no_img', {title: 'Teams', team1: team1, team2: team2})
+
+};
+
+
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -194,7 +306,8 @@ exports.player_create_post = function (req, res, next) {
             family_name: req.body.family_name,
             date_of_birth: req.body.date_of_birth,
             score: req.body.score,
-            nick: req.body.nick
+            nick: req.body.nick,
+            image_url: req.body.image_url,
         });
 
     if (errors) {

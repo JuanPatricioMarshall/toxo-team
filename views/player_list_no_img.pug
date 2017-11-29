@@ -3,12 +3,12 @@ extends t-layout
 block content
     h1= title
 
-    form(method='POST' action='/players_team')
+    form(method='POST' action='/players_team_no_img')
         ul
             each player in player_list
                 li
                     input(type="checkbox", name="players",checked=(true===false ? player : undefined), value = player)
-                    a(href=player.url)
-                        img(width="50", height="50", src=player.image_url)
-                    p #{player.name}
+                    a(href=player.url) #{player.name}
+                    | (#{player.date_of_birth}
+
         button.btn.btn-primary(type='submit') Submit

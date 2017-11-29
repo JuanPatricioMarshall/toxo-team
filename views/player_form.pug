@@ -14,7 +14,8 @@ block content
             input#nick.form-control(type='text', placeholder='nick'  name= 'nick' required = 'true' value=(undefined===player ? '' : player.nick))
             label(for='score') score:
             input#score.form-control(type='Number', placeholder='0'  name= 'score' required = 'true' value=(undefined===player ? '' : player.score))
-
+            label(for='image_url') image_url:
+            input#image_url.form-control(type='text', placeholder='image_url'  name= 'image_url'  value=(undefined === player ? '' : player.image_url))
         div.form-group
             label(for='date_of_birth') Date of birth:
             input#date_of_birth.form-control(type='date', name='date_of_birth', value=(undefined===player ? '' : player.date_of_birth) )
