@@ -1,0 +1,24 @@
+doctype html
+html(lang='en')
+    head
+        title= title
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body
+        div(class='container-fluid')
+            img.className#IdName(src="https://scontent.faep8-2.fna.fbcdn.net/v/t1.0-9/13935004_10209214078461439_6350959200304196857_n.jpg?oh=d27cbbe72b9863bec8d54c9cc53d322d&oe=5AD73903" alt="Image Title")
+            h1 Lauty chileno
+            div(class='row')
+                div(class='col-sm-2')
+                    block sidebar
+                        ul(class='sidebar-nav')
+                            li
+                                a(href='/') Home
+                            li
+                                a(href='/players') All players
+                            li
+                                a(href='/player/create') Create new Player

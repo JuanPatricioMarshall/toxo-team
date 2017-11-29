@@ -73,16 +73,16 @@ exports.player_make_team = function (req, res) {
         var playerI = JSON.parse(players.pop());
         var playerII = JSON.parse(players.pop());
 
-        if(i === 0){
+        if (i === 0) {
             team1.push(playerI);
             score1 = score1 + playerI.score;
             team2.push(playerII);
             score2 = score2 + playerII.score;
 
         }
-        else{
-            if(score1 >= score2){
-                if (playerI.score > playerII.score){
+        else {
+            if (score1 >= score2) {
+                if (playerI.score > playerII.score) {
 
                     team2.push(playerI);
                     score2 = score2 + playerI.score;
@@ -91,7 +91,7 @@ exports.player_make_team = function (req, res) {
                     score1 = score1 + playerII.score;
 
 
-                } else{
+                } else {
                     team2.push(playerII);
                     score2 = score2 + playerII.score;
 
@@ -99,8 +99,8 @@ exports.player_make_team = function (req, res) {
                     score1 = score1 + playerI.score;
                 }
             }
-            else{
-                if (playerI.score < playerII.score){
+            else {
+                if (playerI.score < playerII.score) {
 
                     team2.push(playerI);
                     score2 = score2 + playerI.score;
@@ -109,7 +109,7 @@ exports.player_make_team = function (req, res) {
                     score1 = score1 + playerII.score;
 
 
-                } else{
+                } else {
                     team2.push(playerII);
                     score2 = score2 + playerII.score;
 
@@ -203,14 +203,20 @@ exports.player_create_post = function (req, res, next) {
     }
     else {
         // Data from form is valid
+        var name = player.first_name;
+        if (player.first_name === "KONAMI" || name.toLowerCase() === "konami") {
+            res.render('player_lauty', {title: 'Huevo de Pascua'});
+        } else {
 
-        player.save(function (err) {
-            if (err) {
-                return next(err);
-            }
-            //successful - redirect to new author record.
-            res.redirect(player.url);
-        });
+
+            player.save(function (err) {
+                if (err) {
+                    return next(err);
+                }
+                //successful - redirect to new author record.
+                res.redirect(player.url);
+            });
+        }
     }
 
 };
